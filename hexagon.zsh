@@ -22,26 +22,18 @@ hexagon::format() {
   hexagon::color $color $human[1]
 }
 
-zmodload zsh/datetime zsh/stat
-
-HEXAGON_TIME_FILE=$(mktemp)
+zmodload zsh/datetime
 
 hexagon::command_start() {
-  touch $HEXAGON_TIME_FILE
+  hexagon_command_start=$EPOCHSECONDS
 }
 
 add-zsh-hook preexec hexagon::command_start
 
 hexagon_timer() {
-  [[ -z $HEXAGON_TIME_FILE ]] && return
-  [[ -f $HEXAGON_TIME_FILE ]] || return
+  [[ -n $hexagon_command_start ]] || return
 
-  local atime=$(zstat +atime $HEXAGON_TIME_FILE)
-  local elapsed
-
-  rm -f $HEXAGON_TIME_FILE
-
-  ((elapsed = $EPOCHSECONDS - $atime))
+  local elapsed=$(( EPOCHSECONDS - hexagon_command_start ))
   ((elapsed > 5)) && hexagon::format $elapsed
 }
 
@@ -54,8 +46,7 @@ hexagon_git_time() {
 
   [[ -z $last_commit ]] && hexagon::color default welcome && return
 
-  local now=$(date +%s)
-  local seconds_since_last_commit=$((now - last_commit))
+  local seconds_since_last_commit=$((EPOCHSECONDS - last_commit))
 
   hexagon::format $seconds_since_last_commit
 }
@@ -65,8 +56,7 @@ hexagon_git_branch() {
 }
 
 hexagon_git_status() {
-  [[ -z $(git status --porcelain --ignore-submodules HEAD) ]] \
-  && [[ -z $(git ls-files --others --modified --exclude-standard $(git rev-parse --show-toplevel)) ]] \
+  [[ -z $(git status --porcelain --ignore-submodules | grep '^.[^ ]') ]] \
   && hexagon::color green ⬢ || hexagon::color red ⬡
 }
 
@@ -100,6 +90,8 @@ hexagon::render() {
     $(hexagon_jobs)
     $(hexagon_git)
   )
+
+  unset hexagon_command_start
 
   PROMPT=$(hexagon::color blue "%2~ ")
   RPROMPT=${(ps. .)output}
