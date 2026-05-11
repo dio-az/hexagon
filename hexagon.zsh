@@ -108,8 +108,9 @@ hexagon::render() {
 
   unset hexagon_command_start
 
-  PROMPT=$(hexagon::color blue "%2~ ")
   RPROMPT=${(ps. .)output}
 }
+
+PROMPT=$(hexagon::color blue "%2~ ")
 
 add-zsh-hook precmd hexagon::render
