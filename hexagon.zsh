@@ -42,46 +42,61 @@ hexagon_jobs() {
 }
 
 hexagon_git_time() {
-  local last_commit=$(git log -1 --pretty=format:'%at' 2> /dev/null)
+  [[ -z $hexagon_git[commit_time] ]] && hexagon::color default welcome && return
 
-  [[ -z $last_commit ]] && hexagon::color default welcome && return
-
-  local seconds_since_last_commit=$((EPOCHSECONDS - last_commit))
+  local seconds_since_last_commit=$((EPOCHSECONDS - hexagon_git[commit_time]))
 
   hexagon::format $seconds_since_last_commit
 }
 
-hexagon_git_branch() {
-  hexagon::color 242 $(git symbolic-ref --short HEAD 2> /dev/null || git rev-parse --short HEAD)
+hexagon_git_head() {
+  hexagon::color 242 $hexagon_git[head]
 }
 
 hexagon_git_status() {
-  [[ -z $(git status --porcelain --ignore-submodules | grep '^.[^ ]') ]] \
-  && hexagon::color green ⬢ || hexagon::color red ⬡
+  [[ -z $hexagon_git[dirty] ]] && hexagon::color green ⬢ || hexagon::color red ⬡
 }
 
 hexagon_git_remote() {
   local unpushed=⇡
   local unpulled=⇣
-  local local_commit=$(git rev-parse @ 2> /dev/null)
-  local remote_commit=$(git rev-parse @{u} 2> /dev/null)
 
-  [[ $local_commit == @ || $local_commit == $remote_commit ]] && return
-
-  local common_base=$(git merge-base @ @{u} 2> /dev/null)
-
-  [[ $common_base == $remote_commit ]] && echo -n $unpushed && return
-  [[ $common_base == $local_commit ]]  && echo -n $unpulled && return
+  (( hexagon_git[ahead] == 0 && hexagon_git[behind] == 0 )) && return
+  (( hexagon_git[behind] == 0 )) && echo -n $unpushed && return
+  (( hexagon_git[ahead]  == 0 )) && echo -n $unpulled && return
 
   echo -n $unpushed $unpulled
 }
 
 hexagon_git() {
-  git rev-parse --git-dir &> /dev/null || return
+  local report=$(git status --porcelain=v2 --branch --ignore-submodules 2>/dev/null)
 
-  $(git rev-parse --is-bare-repository 2> /dev/null) && hexagon::color blue ⬢ && return
+  [[ -z $report ]] && return
 
-  echo -n $(hexagon_git_remote) $(hexagon_git_branch) $(hexagon_git_time) $(hexagon_git_status)
+  local -A hexagon_git
+  local line
+  for line in ${(f)report}; do
+    case $line in
+      '# branch.head '*) hexagon_git[head]=${line#'# branch.head '} ;;
+      '# branch.oid '*) hexagon_git[sha]=${line#'# branch.oid '} ;;
+      '# branch.ab '*)
+        local ab=${line#'# branch.ab +'}
+        hexagon_git[ahead]=${ab%% -*}
+        hexagon_git[behind]=${ab##*-}
+        ;;
+      '# '*) ;;
+      *) hexagon_git[dirty]=1 ;;
+    esac
+  done
+
+  if [[ $hexagon_git[head] == '(detached)' ]]; then
+    local tag=$(git describe --tags --exact-match 2>/dev/null)
+    hexagon_git[head]=${tag:-${hexagon_git[sha][1,7]}}
+  fi
+
+  hexagon_git[commit_time]=$(git log -1 --format=%ct 2>/dev/null)
+
+  echo -n $(hexagon_git_remote) $(hexagon_git_head) $(hexagon_git_time) $(hexagon_git_status)
 }
 
 hexagon::render() {
