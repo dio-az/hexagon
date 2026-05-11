@@ -38,7 +38,7 @@ hexagon_timer() {
 }
 
 hexagon_jobs() {
-  [[ 0 -ne $(jobs | wc -l) ]] && hexagon::color blue '⚙ %(1j.%j.-)'
+  (( $#jobstates )) && hexagon::color blue '⚙ %(1j.%j.-)'
 }
 
 hexagon_git_time() {
