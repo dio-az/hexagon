@@ -74,6 +74,7 @@ hexagon_git() {
 	[[ -z $report ]] && return
 
 	local -A hexagon_git
+
 	local line
 	for line in ${(f)report}; do
 		case $line in
@@ -85,7 +86,8 @@ hexagon_git() {
 				hexagon_git[behind]=${ab##*-}
 				;;
 			'# '*) ;;
-			*) hexagon_git[dirty]=1 ;;
+			'1 '?'.'* | '2 '?'.'*) ;;
+			*) hexagon_git[dirty]=1; break ;;
 		esac
 	done
 
