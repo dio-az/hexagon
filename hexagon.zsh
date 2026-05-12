@@ -1,5 +1,7 @@
 autoload -U add-zsh-hook
 
+ZLE_RPROMPT_INDENT=0
+
 hexagon::color() {
 	(($# - 2)) || echo -n %F{$1}$2%f
 }
