@@ -2,26 +2,38 @@ autoload -U add-zsh-hook
 
 ZLE_RPROMPT_INDENT=0
 
+hexagon::style() {
+	zstyle $@[1,3] $3 && return
+	[[ $1 == -a ]] && set -A $3 ${@:4} || : ${(P)3::=$4}
+}
+
 hexagon::color() {
 	(($# - 2)) || echo -n %F{$1}$2%f
 }
 
-hexagon::format() {
+hexagon::duration() {
 	local seconds=$1
 	local days=$((seconds / 86400))
 	local hours=$((seconds / 3600 % 24))
 	local minutes=$((seconds / 60 % 60))
 	local seconds=$((seconds % 60))
 
-	local -a human=()
-	local color
+	local color label
+	if ((days > 0)); then
+		hexagon::style -s ':hexagon:duration:day' color red
+		label=${days}d
+	elif ((hours > 0)); then
+		hexagon::style -s ':hexagon:duration:hour' color white
+		label=${hours}h
+	elif ((minutes > 0)); then
+		hexagon::style -s ':hexagon:duration:minute' color green
+		label=${minutes}m
+	elif ((seconds > 0)); then
+		hexagon::style -s ':hexagon:duration:second' color green
+		label=${seconds}s
+	fi
 
-	((days > 0)) && human+=${days}d && color=red
-	((hours > 0)) && human+=${hours}h && : ${color:=white}
-	((minutes > 0)) && human+=${minutes}m
-	((seconds > 0)) && human+=${seconds}s && : ${color:=green}
-
-	hexagon::color $color $human[1]
+	hexagon::color $color $label
 }
 
 zmodload zsh/datetime
@@ -35,43 +47,66 @@ add-zsh-hook preexec hexagon::command_start
 hexagon_timer() {
 	[[ -n $hexagon_command_start ]] || return
 
+	local threshold
+	hexagon::style -s ':hexagon:timer' threshold 5
+
 	local elapsed=$(( EPOCHSECONDS - hexagon_command_start ))
-	((elapsed > 5)) && hexagon::format $elapsed
+	((elapsed > threshold)) && hexagon::duration $elapsed
 }
 
 hexagon_jobs() {
-	(( $#jobstates )) && hexagon::color blue '⚙ %(1j.%j.-)'
+	(( $#jobstates )) || return
+
+	local color symbol
+	hexagon::style -s ':hexagon:jobs' color blue
+	hexagon::style -s ':hexagon:jobs' symbol ⚙
+
+	hexagon::color $color "%(1j.%j.-)$symbol"
 }
 
-hexagon_git_time() {
-	[[ -z $hexagon_git[commit_time] ]] && hexagon::color default welcome && return
+hexagon_git_elapsed() {
+	[[ -n $hexagon_git[commit_time] ]] || return
 
 	local seconds_since_last_commit=$((EPOCHSECONDS - hexagon_git[commit_time]))
-
-	hexagon::format $seconds_since_last_commit
+	hexagon::duration $seconds_since_last_commit
 }
 
-hexagon_git_head() {
-	hexagon::color 242 $hexagon_git[head]
+hexagon_git_branch() {
+	local color
+	hexagon::style -s ':hexagon:git:branch' color 242
+
+	hexagon::color $color $hexagon_git[branch]
 }
 
 hexagon_git_status() {
-	[[ -z $hexagon_git[dirty] ]] && hexagon::color green ⬢ || hexagon::color red ⬡
+	local color symbol
+	if [[ -n $hexagon_git[dirty] ]]; then
+		hexagon::style -s ':hexagon:git:status:dirty' color red
+		hexagon::style -s ':hexagon:git:status:dirty' symbol ⬡
+	else
+		hexagon::style -s ':hexagon:git:status:clean' color green
+		hexagon::style -s ':hexagon:git:status:clean' symbol ⬢
+	fi
+
+	hexagon::color $color $symbol
 }
 
 hexagon_git_remote() {
-	local unpushed=⇡
-	local unpulled=⇣
-
 	(( hexagon_git[ahead] == 0 && hexagon_git[behind] == 0 )) && return
-	(( hexagon_git[behind] == 0 )) && echo -n $unpushed && return
-	(( hexagon_git[ahead] == 0 )) && echo -n $unpulled && return
 
-	echo -n $unpushed $unpulled
+	local ahead behind color
+	hexagon::style -s ':hexagon:git:remote' ahead ⇡
+	hexagon::style -s ':hexagon:git:remote' behind ⇣
+	hexagon::style -s ':hexagon:git:remote' color default
+
+	(( hexagon_git[behind] == 0 )) && hexagon::color $color $ahead && return
+	(( hexagon_git[ahead] == 0 )) && hexagon::color $color $behind && return
+
+	hexagon::color $color "$ahead $behind"
 }
 
 hexagon_git() {
-	local report=$(git status --porcelain=v2 --branch --ignore-submodules 2>/dev/null)
+	local report=$(git status --porcelain=v2 --branch --show-stash --ignore-submodules 2>/dev/null)
 
 	[[ -z $report ]] && return
 
@@ -80,41 +115,61 @@ hexagon_git() {
 	local line
 	for line in ${(f)report}; do
 		case $line in
-			'# branch.head '*) hexagon_git[head]=${line#'# branch.head '} ;;
+			'# branch.head '*) hexagon_git[branch]=${line#'# branch.head '} ;;
 			'# branch.oid '*) hexagon_git[sha]=${line#'# branch.oid '} ;;
 			'# branch.ab '*)
 				local ab=${line#'# branch.ab +'}
 				hexagon_git[ahead]=${ab%% -*}
 				hexagon_git[behind]=${ab##*-}
 				;;
+			'# stash '*) hexagon_git[stash]=${line#'# stash '} ;;
 			'# '*) ;;
 			'1 '?'.'* | '2 '?'.'*) ;;
 			*) hexagon_git[dirty]=1; break ;;
 		esac
 	done
 
-	if [[ $hexagon_git[head] == '(detached)' ]]; then
+	if [[ $hexagon_git[branch] == '(detached)' ]]; then
 		local tag=$(git describe --tags --exact-match 2>/dev/null)
-		hexagon_git[head]=${tag:-${hexagon_git[sha][1,7]}}
+		hexagon_git[branch]=${tag:-${hexagon_git[sha][1,7]}}
 	fi
 
 	hexagon_git[commit_time]=$(git log -1 --format=%ct 2>/dev/null)
 
-	echo -n $(hexagon_git_remote) $(hexagon_git_head) $(hexagon_git_time) $(hexagon_git_status)
+	local -a components
+	hexagon::style -a ':hexagon:git' components remote branch elapsed status
+
+	local -a output=()
+
+	local component
+	for component in $components; do
+		local result=$(hexagon_git_$component)
+		[[ -n $result ]] && output+=$result
+	done
+
+	echo -n ${(j: :)output}
 }
 
 hexagon::render() {
-	local -a output=(
-		$(hexagon_timer)
-		$(hexagon_jobs)
-		$(hexagon_git)
-	)
+	local -a components
+	hexagon::style -a ':hexagon' components timer jobs git
+
+	local -a output=()
+
+	local component
+	for component in $components; do
+		local result=$(hexagon_$component)
+		[[ -n $result ]] && output+=$result
+	done
 
 	unset hexagon_command_start
 
-	RPROMPT=${(ps: :)output}
-}
+	local color format
+	hexagon::style -s ':hexagon:path' color blue
+	hexagon::style -s ':hexagon:path' format %2~
 
-PROMPT=$(hexagon::color blue "%2~ ")
+	PROMPT="$(hexagon::color $color $format) "
+	RPROMPT=${(j: :)output}
+}
 
 add-zsh-hook precmd hexagon::render
