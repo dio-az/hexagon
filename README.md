@@ -2,8 +2,31 @@
 
 # Hexagon
 
-A minimalist zsh theme based on [geometry](https://github.com/geometry-zsh/geometry).
+> a minimalist zsh prompt theme inspired by [geometry](https://github.com/geometry-zsh/geometry), fast *by design*.
 
-## Installing
+At a glance, you see what matters. Nothing else clutters your prompt.
 
-Add `zplug "diogoazevedos/hexagon"` to your `~/.zshrc`.
+- Current branch, tag, or short commit SHA
+- Clean ⬢ or dirty ⬡ working tree
+- Commits ⇡ ahead or ⇣ behind upstream
+- Time since the last commit
+- Elapsed time on long-running commands
+- Background job count
+
+## Install
+
+### [antidote](https://antidote.sh) *(recommended)*
+
+Add this to your `~/.zsh_plugins.txt`:
+
+```
+dio-az/hexagon
+```
+
+### [zplug](https://github.com/zplug/zplug)
+
+Add this to your `~/.zshrc`:
+
+```sh
+zplug "dio-az/hexagon"
+```
