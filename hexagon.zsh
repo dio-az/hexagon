@@ -8,7 +8,7 @@ hexagon::style() {
 }
 
 hexagon::color() {
-	(($# - 2)) || echo -n %F{$1}$2%f
+	(($# - 2)) || print -n %F{$1}$2%f
 }
 
 hexagon::duration() {
@@ -139,28 +139,26 @@ hexagon_git() {
 	local -a components
 	hexagon::style -a ':hexagon:git' components remote branch elapsed status
 
-	local -a output=()
+	local output=$(
+		for component in $components; do
+			hexagon_git_$component
+			print -n '\0'
+		done
+	)
 
-	local component
-	for component in $components; do
-		local result=$(hexagon_git_$component)
-		[[ -n $result ]] && output+=$result
-	done
-
-	echo -n ${(j: :)output}
+	print -n ${(j: :)${(0)output}}
 }
 
 hexagon::render() {
 	local -a components
 	hexagon::style -a ':hexagon' components timer jobs git
 
-	local -a output=()
-
-	local component
-	for component in $components; do
-		local result=$(hexagon_$component)
-		[[ -n $result ]] && output+=$result
-	done
+	local output=$(
+		for component in $components; do
+			hexagon_$component
+			print -n '\0'
+		done
+	)
 
 	unset hexagon_command_start
 
@@ -169,7 +167,7 @@ hexagon::render() {
 	hexagon::style -s ':hexagon:path' format %2~
 
 	PROMPT="$(hexagon::color $color $format) "
-	RPROMPT=${(j: :)output}
+	RPROMPT=${(j: :)${(0)output}}
 }
 
 add-zsh-hook precmd hexagon::render
