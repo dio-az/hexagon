@@ -7,8 +7,12 @@ hexagon::style() {
 	[[ $1 == -a ]] && set -A $3 ${@:4} || : ${(P)3::=$4}
 }
 
+hexagon::sanitize() {
+	print -n -- ${${1//'$'/}//\`/}
+}
+
 hexagon::color() {
-	(($# - 2)) || print -n %F{$1}$2%f
+	(($# == 2)) && print -n %F{$1}$2%f
 }
 
 hexagon::duration() {
@@ -115,7 +119,7 @@ hexagon_git() {
 	local line
 	for line in ${(f)report}; do
 		case $line in
-			'# branch.head '*) hexagon_git[branch]=${line#'# branch.head '} ;;
+			'# branch.head '*) hexagon_git[branch]=$(hexagon::sanitize ${line#'# branch.head '}) ;;
 			'# branch.oid '*) hexagon_git[sha]=${line#'# branch.oid '} ;;
 			'# branch.ab '*)
 				local ab=${line#'# branch.ab +'}
@@ -131,7 +135,7 @@ hexagon_git() {
 
 	if [[ $hexagon_git[branch] == '(detached)' ]]; then
 		local tag=$(git describe --tags --exact-match 2>/dev/null)
-		hexagon_git[branch]=${tag:-${hexagon_git[sha][1,7]}}
+		hexagon_git[branch]=$(hexagon::sanitize ${tag:-${hexagon_git[sha][1,7]}})
 	fi
 
 	hexagon_git[commit_time]=$(git log -1 --format=%ct 2>/dev/null)
