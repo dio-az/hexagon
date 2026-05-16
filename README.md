@@ -1,4 +1,4 @@
-[![asciicast](https://asciinema.org/a/X8Bs62wIxJD5Sa4G.svg)](https://asciinema.org/a/X8Bs62wIxJD5Sa4G)
+[![asciicast](https://asciinema.org/a/1051683.svg)](https://asciinema.org/a/1051683)
 
 > a minimalist zsh prompt theme inspired by [geometry](https://github.com/geometry-zsh/geometry), fast *by design*.
 
