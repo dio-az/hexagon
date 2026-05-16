@@ -126,7 +126,7 @@ The following helper functions are available:
 | `hexagon::style -a <context> <property> <defaults...>` | Like `-s`, but for array styles                                       |
 | `hexagon::duration <seconds>`                          | Format a duration label (`5s`, `3m`), styled by `:hexagon:duration:*` |
 
-Here is a component that shows the active Node.js version:
+Here is a component that shows the active major Node.js version:
 
 ```zsh
 hexagon_node() {
@@ -136,7 +136,7 @@ hexagon_node() {
 	hexagon::style -s ':hexagon:node' color green
 	hexagon::style -s ':hexagon:node' symbol ⬡
 
-	hexagon::color $color $symbol$(node --version)
+	hexagon::color $color $symbol${${$(node --version)#v}%%.*}
 }
 
 zstyle ':hexagon' components node timer jobs git
