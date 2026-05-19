@@ -122,9 +122,13 @@ The following helper functions are available:
 | Helper                                                 | Description                                                           |
 | ------------------------------------------------------ | --------------------------------------------------------------------- |
 | `hexagon::color <color> <text>`                        | Wrap `text` in a `%F{color}text%f` prompt escape                      |
+| `hexagon::escape <text>`                               | Neutralize prompt metacharacters (`%`, `!`, `$`, `` ` ``, `\`)        |
 | `hexagon::style -s <context> <property> <default>`     | Read a scalar `zstyle` into `$<property>`, defaulting to `<default>`  |
 | `hexagon::style -a <context> <property> <defaults...>` | Like `-s`, but for array styles                                       |
 | `hexagon::duration <seconds>`                          | Format a duration label (`5s`, `3m`), styled by `:hexagon:duration:*` |
+
+> [!IMPORTANT]
+> Always run untrusted text through `hexagon::escape` before printing it, or it can hijack the prompt and run arbitrary commands.
 
 Here is a component that shows the active major Node.js version:
 
