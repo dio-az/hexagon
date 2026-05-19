@@ -5,8 +5,8 @@
 At a glance, you see what matters. Nothing else clutters your prompt.
 
 - Current branch, tag, or short commit SHA
-- Clean ⬢ or dirty ⬡ working tree
-- Commits ⇡ ahead or ⇣ behind upstream
+- Clean `⬢` or dirty `⬡` working tree
+- Commits `⇡` ahead or `⇣` behind upstream
 - Time since the last commit
 - Elapsed time on long-running commands
 - Background job count
@@ -104,6 +104,9 @@ Inside a repo, see your branch, working-tree state, and upstream tracking:
 | `:hexagon:git:remote`       | `ahead`      | `⇡`                            | Symbol shown when ahead of upstream          |
 | `:hexagon:git:remote`       | `behind`     | `⇣`                            | Symbol shown when behind upstream            |
 
+> [!TIP]
+> The `elapsed` sub-component is styled via [`:hexagon:duration:*`](#duration).
+
 ## Custom components
 
 A component is a shell function named `hexagon_<name>` that writes its output to `stdout`.
@@ -111,10 +114,10 @@ A component is a shell function named `hexagon_<name>` that writes its output to
 > [!TIP]
 > Return without printing anything to hide the component.
 
-Register custom components by adding them to `:hexagon` `components`:
+Register custom components by setting `:hexagon` `components`. This *replaces* the list, so include any built-ins you still want:
 
 ```zsh
-zstyle ':hexagon' components <name>
+zstyle ':hexagon' components <name> timer jobs git
 ```
 
 The following helper functions are available:
