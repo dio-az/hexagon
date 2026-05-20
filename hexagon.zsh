@@ -9,11 +9,16 @@ hexagon::style() {
 
 hexagon::escape() {
 	local text=$1
-	text=${text//'\'/'\\'}
-	text=${text//'$'/'\$'}
-	text=${text//'`'/'\`'}
-	text=${text//'%'/'%%'}
-	text=${text//'!'/'!!'}
+
+	if [[ -o promptsubst ]]; then
+		text=${text//'\'/'\\'}
+		text=${text//'$'/'\$'}
+		text=${text//'`'/'\`'}
+	fi
+
+	[[ -o promptpercent ]] && text=${text//'%'/'%%'}
+	[[ -o promptbang ]] && text=${text//'!'/'!!'}
+
 	print -rn -- $text
 }
 
