@@ -10,6 +10,7 @@ At a glance, you see what matters. Nothing else clutters your prompt.
 - Time since the last commit
 - Elapsed time on long-running commands
 - Background job count
+- Exit code of the previous command when it fails
 
 ## Install
 
@@ -87,6 +88,24 @@ See how many background jobs are running:
 | --------------- | -------- | ------- | ----------------------------------- |
 | `:hexagon:jobs` | `color`  | `blue`  | Job count color                     |
 | `:hexagon:jobs` | `symbol` | `⚙`     | Symbol rendered after the job count |
+
+### Exit
+
+When the previous command fails, see its exit code:
+
+| Context         | Property | Default | Description                          |
+| --------------- | -------- | ------- | ------------------------------------ |
+| `:hexagon:exit` | `color`  | `red`   | Exit code color                      |
+| `:hexagon:exit` | `symbol` | `‣`     | Symbol rendered before the exit code |
+
+> [!NOTE]
+> The `exit` component is not enabled by default. Add it to your [components](#components):
+>
+> ```zsh
+> zstyle ':hexagon' components exit timer jobs git
+> ```
+>
+> The indicator is hidden for `0` (success), `130` (Ctrl-C), and `141` (SIGPIPE).
 
 ### Git
 
