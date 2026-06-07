@@ -103,9 +103,14 @@ Inside a repo, see your branch, working-tree state, and upstream tracking:
 | `:hexagon:git:remote`       | `color`      | `default`                      | Ahead/behind indicator color                 |
 | `:hexagon:git:remote`       | `ahead`      | `⇡`                            | Symbol shown when ahead of upstream          |
 | `:hexagon:git:remote`       | `behind`     | `⇣`                            | Symbol shown when behind upstream            |
+| `:hexagon:git:stash`        | `color`      | `242`                          | Stash count color                            |
+| `:hexagon:git:stash`        | `symbol`     | `≡`                            | Symbol rendered after the stash count        |
 
 > [!TIP]
 > The `elapsed` sub-component is styled via [`:hexagon:duration:*`](#duration).
+
+> [!NOTE]
+> The `stash` sub-component ships built-in but isn't enabled by default.
 
 ## Custom components
 
@@ -119,6 +124,9 @@ Register custom components by setting `:hexagon` `components`. This *replaces* t
 ```zsh
 zstyle ':hexagon' components <name> timer jobs git
 ```
+
+> [!TIP]
+> You can also redefine built-in components by giving your function the same name.
 
 The following helper functions are available:
 
@@ -165,18 +173,20 @@ Like a regular component, but its function is named `hexagon_git_<name>`, regist
 | `hexagon_git[commit_time]` | Unix timestamp of the most recent commit, or empty in a fresh repo  |
 | `hexagon_git[stash]`       | Number of stashes, or empty when none                               |
 
-Here is a component that shows the stash count:
+Here is an override of the built-in `remote` that shows how *many commits* are ahead and behind upstream:
 
 ```zsh
-hexagon_git_stash() {
-	(( hexagon_git[stash] == 0 )) && return
+hexagon_git_remote() {
+	(( hexagon_git[ahead] == 0 && hexagon_git[behind] == 0 )) && return
 
-	local color symbol
-	hexagon::style -s ':hexagon:git:stash' color 242
-	hexagon::style -s ':hexagon:git:stash' symbol ≡
+	local ahead behind color
+	hexagon::style -s ':hexagon:git:remote' ahead ⇡
+	hexagon::style -s ':hexagon:git:remote' behind ⇣
+	hexagon::style -s ':hexagon:git:remote' color default
 
-	hexagon::color $color $hexagon_git[stash]$symbol
+	(( hexagon_git[behind] == 0 )) && hexagon::color $color $hexagon_git[ahead]$ahead && return
+	(( hexagon_git[ahead] == 0 )) && hexagon::color $color $hexagon_git[behind]$behind && return
+
+	hexagon::color $color "$hexagon_git[ahead]$ahead $hexagon_git[behind]$behind"
 }
-
-zstyle ':hexagon:git' components remote branch elapsed status stash
 ```
