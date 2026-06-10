@@ -164,7 +164,19 @@ hexagon_git() {
 	print -rn -- ${(j: :)${(0)output}}
 }
 
+hexagon_exit() {
+	[[ $exit_code == (0|130|141) ]] && return
+
+	local symbol color
+	hexagon::style -s ':hexagon:exit' symbol ‣
+	hexagon::style -s ':hexagon:exit' color red
+
+	hexagon::color $color $symbol$exit_code
+}
+
 hexagon::render() {
+	local exit_code=$?
+
 	local -a components
 	hexagon::style -a ':hexagon' components timer jobs git
 
