@@ -120,6 +120,16 @@ hexagon_git_remote() {
 	hexagon::color $color "$ahead $behind"
 }
 
+hexagon_git_stash() {
+	(( hexagon_git[stash] == 0 )) && return
+
+	local color symbol
+	hexagon::style -s ':hexagon:git:stash' color 242
+	hexagon::style -s ':hexagon:git:stash' symbol ≡
+
+	hexagon::color $color $hexagon_git[stash]$symbol
+}
+
 hexagon_git() {
 	local report=$(git status --porcelain=v2 --branch --show-stash --ignore-submodules 2>/dev/null)
 
