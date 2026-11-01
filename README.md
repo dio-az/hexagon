@@ -60,6 +60,13 @@ Add, drop, or rearrange the right-prompt pieces:
 | Context    | Property     | Default          | Description                       |
 | ---------- | ------------ | ---------------- | --------------------------------- |
 | `:hexagon` | `components` | `timer jobs git` | Right-prompt components, in order |
+| `:hexagon` | `async`      | `git`            | Components rendered in background |
+
+To render everything inline:
+
+```zsh
+zstyle ':hexagon' async
+```
 
 ### Timer
 
@@ -177,6 +184,15 @@ zstyle ':hexagon' components node timer jobs git
 ```
 
 Place this in your `~/.zshrc` *after* loading Hexagon.
+
+If a component is slow, list it under `async` so it doesn't hold up the prompt:
+
+```zsh
+zstyle ':hexagon' async node git
+```
+
+> [!NOTE]
+> Keep components that depend on the last command out of `async`, since a background rerun can't see it.
 
 ### Git components
 
