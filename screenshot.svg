@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="943.41333296" height="485.33321200000006" font-family="'Cascadia Code','Source Code Pro',Menlo,Consolas,'DejaVu Sans Mono',monospace,'Symbols Nerd Font'" font-size="14px">
+  <style>
+    .br { font-weight: bold }
+    .fa { fill-opacity: 0.5 }
+    .it { font-style: italic }
+    .un { text-decoration: underline }
+    .term-text tspan tspan { white-space: pre }
+
+    @font-face {
+      font-family: "Symbols Nerd Font";
+      src: url("https://asciinema.org/fonts/SymbolsNerdFont-Regular-337b40fc23735cb78fbe3379fae18138.woff2?vsn=d") format("woff2");
+    }
+
+  </style>
+
+  <rect width="100%" height="100%" style="fill: #1e1f29" rx="4" ry="4"></rect>
+
+  <svg x="8.42333333" y="9.333331000000001" class="default-text-fill">
+    <image x="0" y="0" width="926.5666663000001" height="466.66655000000003" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA3AAAAJYCAIAAACsAJNvAAALS0lEQVR4Xu3WoVEEABAEQT4RHgv5x4KGTEgAxQj2qrrlqpXzeH2+vwAAwF89BCUAAIWgBAAgEZQAACSCEgCARFACAJAISgAAEkEJAEAiKAEASAQlAACJoAQAIBGUAAAkghIAgERQAgCQCEoAABJBCQBAIigBAEgEJQAAiaAEACARlAAAJIISAIBEUAIAkAhKAAASQQkAQCIoAQBIBCUAAImgBAAgEZQAACSCEgCARFACAJAISgAAEkEJAEAiKAEASAQlAACJoAQAIBGUAAAkghIAgERQAgCQCEoAABJBCQBAIigBAEgEJQAAiaAEACARlAAAJIISAIBEUAIAkAhKAAASQQkAQCIoAQBIBCUAAImgBAAgEZQAACSCEgCARFACAJAISgAAEkEJAEAiKAEASAQlAACJoAQAIBGUAAAkghIAgERQAgCQCEoAABJBCQBAIigBAEgEJQAAiaAEACARlAAAJIISAIBEUAIAkAhKAAASQQkAQCIoAQBIBCUAAImgBAAgEZQAACSCEgCARFACAJAISgAAEkEJAEAiKAEASAQlAACJoAQAIBGUAAAkghIAgERQAgCQCEoAABJBCQBAIigBAEgEJQAAiaAEACARlAAAJIISAIBEUAIAkAhKAAASQQkAQCIoAQBIBCUAAImgBAAgEZQAACSCEgCARFACAJAISgAAEkEJAEAiKAEASAQlAACJoAQAIBGUAAAkghIAgERQAgCQCEoAABJBCQBAIigBAEgEJQAAiaAEACARlAAAJIISAIBEUAIAkAhKAAASQQkAQCIoAQBIBCUAAImgBAAgEZQAACSCEgCARFACAJAISgAAEkEJAEAiKAEASAQlAACJoAQAIBGUAAAkghIAgERQAgCQCEoAABJBCQBAIigBAEgEJQAAiaAEACARlAAAJIISAIBEUAIAkAhKAAASQQkAQCIoAQBIBCUAAImgBAAgEZQAACSCEgCARFACAJAISgAAEkEJAEAiKAEASAQlAACJoAQAIBGUAAAkghIAgERQAgCQCEoAABJBCQBAIigBAEgEJQAAiaAEACARlAAAJIISAIBEUAIAkAhKAAASQQkAQCIoAQBIBCUAAImgBAAgEZQAACSCEgCARFACAJAISgAAEkEJAEAiKAEASAQlAACJoAQAIBGUAAAkghIAgERQAgCQCEoAABJBCQBAIigBAEgEJQAAiaAEACARlAAAJIISAIBEUAIAkAhKAAASQQkAQCIoAQBIBCUAAImgBAAgEZQAACSCEgCARFACAJAISgAAEkEJAEAiKAEASAQlAACJoAQAIBGUAAAkghIAgERQAgCQCEoAABJBCQBAIigBAEgEJQAAiaAEACARlAAAJIISAIBEUAIAkAhKAAASQQkAQCIoAQBIBCUAAImgBAAgEZQAACSCEgCARFACAJAISgAAEkEJAEAiKAEASAQlAACJoAQAIBGUAAAkghIAgERQAgCQCEoAABJBCQBAIigBAEgEJQAAiaAEACARlAAAJIISAIBEUAIAkAhKAAASQQkAQCIoAQBIBCUAAImgBAAgEZQAACSCEgCARFACAJAISgAAEkEJAEAiKAEASAQlAACJoAQAIBGUAAAkghIAgERQAgCQCEoAABJBCQBAIigBAEgEJQAAiaAEACARlAAAJIISAIBEUAIAkAhKAAASQQkAQCIoAQBIBCUAAImgBAAgEZQAACSCEgCARFACAJAISgAAEkEJAEAiKAEASAQlAACJoAQAIBGUAAAkghIAgERQAgCQCEoAABJBCQBAIigBAEgEJQAAiaAEACARlAAAJIISAIBEUAIAkAhKAAASQQkAQCIoAQBIBCUAAImgBAAgEZQAACSCEgCARFACAJAISgAAEkEJAEAiKAEASAQlAACJoAQAIBGUAAAkghIAgERQAgCQCEoAABJBCQBAIigBAEgEJQAAiaAEACARlAAAJIISAIBEUAIAkAhKAAASQQkAQCIoAQBIBCUAAImgBAAgEZQAACSCEgCARFACAJAISgAAEkEJAEAiKAEASAQlAACJoAQAIBGUAAAkghIAgERQAgCQCEoAABJBCQBAIigBAEgEJQAAiaAEACARlAAAJIISAIBEUAIAkAhKAAASQQkAQCIoAQBIBCUAAImgBAAgEZQAACSCEgCARFACAJAISgAAEkEJAEAiKAEASAQlAACJoAQAIBGUAAAkghIAgERQAgCQCEoAABJBCQBAIigBAEgEJQAAiaAEACARlAAAJIISAIBEUAIAkAhKAAASQQkAQCIoR31/ff767Pn28esOAPBfBOUoQQkAXCEoRwlKAOAKQTlKUAIAVwjKUYISALhCUI4SlADAFYJylKAEAK4QlKMEJQBwhaAcJSgBgCsE5ShBCQBcIShHCUoA4ApBOUpQAgBXCMpRghIAuEJQjhKUAMAVgnKUoAQArhCUowQlAHCFoBwlKAGAKwTlKEEJAFwhKEcJSgDgCkE5SlACAFcIylGCEgC4QlCOEpQAwBWCcpSgBACuEJSjBCUAcIWgBAAgEZQAACSCEgCARFACAJAISgAAEkEJAEAiKAEASAQlAACJoAQAIBGUAAAkghIAgERQAgCQCEoAABJBCQBAIigBAEgEJQAAiaAEACARlAAAJIISAIBEUAIAkAhKAAASQQkAQCIoAQBIBCUAAImgBAAgEZQAACSCEgCARFACAJAISgAAEkEJAEAiKAEASAQlAACJoAQAIBGUAAAkghIAgERQAgCQCEoAABJBCQBAIigBAEgEJQAAiaAEACARlAAAJIISAIBEUAIAkAhKAAASQQkAQCIoAQBIBCUAAImgBAAgEZQAACSCEgCARFACAJAISgAAEkEJAEAiKAEASAQlAACJoAQAIBGUAAAkghIAgERQAgCQCEoAABJBCQBAIigBAEgEJQAAiaAEACARlAAAJIISAIBEUAIAkAhKAAASQQkAQCIoAQBIBCUAAImgBAAgEZQAACSCEgCARFACAJAISgAAEkEJAEAiKAEASAQlAACJoAQAIBGUAAAkghIAgERQAgCQCEoAABJBCQBAIigBAEgEJQAAiaAEACARlAAAJIISAIBEUAIAkAhKAAASQQkAQCIoAQBIBCUAAImgBAAgEZQAACSCEgCARFACAJAISgAAEkEJAEAiKAEASAQlAACJoAQAIBGUAAAkghIAgERQAgCQCEoAABJBCQBAIigBAEgEJQAAiaAEACARlAAAJIISAIBEUAIAkAhKAAASQQkAQCIoAQBIBCUAAImgBAAgEZQAACSCEgCARFACAJAISgAAEkEJAEAiKAEASAQlAACJoAQAIBGUAAAkghIAgERQAgCQCEoAABJBCQBAIigBAEgEJQAAiaAEACARlAAAJIISAIBEUAIAkAhKAAASQQkAQCIoAQBIBCUAAImgBAAgEZQAACSCEgCARFACAJAISgAAEkEJAEAiKAEASAQlAACJoAQAIBGUAAAkghIAgERQAgCQCEoAABJBCQBAIigBAEgEJQAAiaAEACARlAAAJIISAIBEUAIAkAhKAAASQQkAQCIoAQBIBCUAAImgBAAgEZQAACSCEgCARFACAJAISgAAEkEJAEAiKAEASAQlAACJoAQAIBGUAAAkghIAgERQAgCQCEoAABJBCQBAIigBAEgEJQAAiaAEACARlAAAJIISAIBEUAIAkAhKAAASQQkAQCIoAQBIBCUAAImgBAAgEZQAACSCEgCARFACAJAISgAAEkEJAEAiKAEASAQlAACJoAQAIBGUAAAkghIAgERQAgCQCEoAABJBCQBAIigBAEgEJQAAiaAEACARlAAAJIISAIBEUAIAkAhKAAASQQkAQCIoAQBIBCUAAMkPXHg5eMaMIOwAAAAASUVORK5CYII=" preserveAspectRatio="none" style="image-rendering: pixelated; image-rendering: crisp-edges;"></image>
+
+    <text xml:space="preserve" class="term-text" style="fill: #ffffff">
+      <tspan y="0.0">
+        <tspan dy="1em" x="0.0" style="fill: #bd93f9">Developer/Personal </tspan><tspan x="160.04333327" style="fill: #50fa7b">mkdir</tspan><tspan x="202.15999992000002"> Example                                                                              </tspan>
+      </tspan><tspan y="18.666662000000002">
+        <tspan dy="1em" x="0.0" style="fill: #bd93f9">Developer/Personal </tspan><tspan x="160.04333327" style="fill: #50fa7b">cd</tspan><tspan x="176.88999993000002"> </tspan><tspan x="185.31333326" class="un">Example</tspan><tspan x="244.27666657">                                                                                 </tspan>
+      </tspan><tspan y="37.333324000000005">
+        <tspan dy="1em" x="0.0" style="fill: #bd93f9">Personal/Example </tspan><tspan x="143.19666661" style="fill: #50fa7b">git</tspan><tspan x="168.4666666"> init                                                                                     </tspan>
+      </tspan><tspan y="55.99998600000001">
+        <tspan dy="1em" x="0.0">Initialized empty Git repository in /Users/dio-az/Developer/Personal/Example/.git/                            </tspan>
+      </tspan><tspan y="74.66664800000001">
+        <tspan dy="1em" x="0.0" style="fill: #bd93f9">Personal/Example </tspan><tspan x="143.19666661" style="fill: #50fa7b">touch</tspan><tspan x="185.31333326"> README.md                                                                       </tspan><tspan x="867.60333299" style="fill: #6c6c6c">main</tspan><tspan x="901.29666631"> </tspan><tspan x="909.71999964" style="fill: #50fa7b">⬢</tspan><tspan x="918.1433329700001"> </tspan>
+      </tspan><tspan y="93.33331000000001">
+        <tspan dy="1em" x="0.0" style="fill: #bd93f9">Personal/Example </tspan><tspan x="143.19666661" style="fill: #50fa7b">git</tspan><tspan x="168.4666666"> add </tspan><tspan x="210.58333325" class="un">README.md</tspan><tspan x="286.39333322">                                                                     </tspan><tspan x="867.60333299" style="fill: #6c6c6c">main</tspan><tspan x="901.29666631"> </tspan><tspan x="909.71999964" style="fill: #ff5555">⬡</tspan><tspan x="918.1433329700001"> </tspan>
+      </tspan><tspan y="111.99997200000001">
+        <tspan dy="1em" x="0.0" style="fill: #bd93f9">Personal/Example </tspan><tspan x="143.19666661" style="fill: #50fa7b">git</tspan><tspan x="168.4666666"> commit -m </tspan><tspan x="261.12333323" style="fill: #f1fa8c">&#39;Initial commit&#39;</tspan><tspan x="395.89666651">                                                        </tspan><tspan x="867.60333299" style="fill: #6c6c6c">main</tspan><tspan x="901.29666631"> </tspan><tspan x="909.71999964" style="fill: #50fa7b">⬢</tspan><tspan x="918.1433329700001"> </tspan>
+      </tspan><tspan y="130.66663400000002">
+        <tspan dy="1em" x="0.0">[main (root-commit) dfc5bce] Initial commit                                                                   </tspan>
+      </tspan><tspan y="149.33329600000002">
+        <tspan dy="1em" x="0.0"> 1 file changed, 0 insertions(+), 0 deletions(-)                                                              </tspan>
+      </tspan><tspan y="167.99995800000002">
+        <tspan dy="1em" x="0.0"> create mode 100644 README.md                                                                                 </tspan>
+      </tspan><tspan y="186.66662000000002">
+        <tspan dy="1em" x="0.0" style="fill: #bd93f9">Personal/Example </tspan><tspan x="143.19666661" style="fill: #50fa7b">sleep</tspan><tspan x="185.31333326"> 10 &amp;; </tspan><tspan x="244.27666657" style="fill: #50fa7b">sleep</tspan><tspan x="286.39333322"> 7                                                                 ⇡ </tspan><tspan x="867.60333299" style="fill: #6c6c6c">main</tspan><tspan x="901.29666631"> </tspan><tspan x="909.71999964" style="fill: #50fa7b">⬢</tspan><tspan x="918.1433329700001"> </tspan>
+      </tspan><tspan y="205.33328200000003">
+        <tspan dy="1em" x="0.0">[1] 15725                                                                                                     </tspan>
+      </tspan><tspan y="223.99994400000003">
+        <tspan dy="1em" x="0.0" style="fill: #bd93f9">Personal/Example </tspan><tspan x="143.19666661">                                                                          </tspan><tspan x="766.52333303" style="fill: #50fa7b">7s</tspan><tspan x="783.36999969"> </tspan><tspan x="791.79333302" style="fill: #bd93f9">1⚙</tspan><tspan x="808.6399996800001"> ⇡ </tspan><tspan x="833.90999967" style="fill: #6c6c6c">main</tspan><tspan x="867.60333299"> </tspan><tspan x="876.02666632" style="fill: #50fa7b">15s</tspan><tspan x="901.29666631"> </tspan><tspan x="909.71999964" style="fill: #50fa7b">⬢</tspan><tspan x="918.1433329700001"> </tspan>
+      </tspan><tspan y="242.66660600000003">
+        <tspan dy="1em" x="0.0">[1]  + 15725 done       sleep 10                                                                              </tspan>
+      </tspan><tspan y="261.33326800000003">
+        <tspan dy="1em" x="0.0" style="fill: #bd93f9">Personal/Example </tspan><tspan x="143.19666661">                                                                          </tspan><tspan x="766.52333303" style="fill: #50fa7b">7s</tspan><tspan x="783.36999969"> </tspan><tspan x="791.79333302" style="fill: #bd93f9">-⚙</tspan><tspan x="808.6399996800001"> ⇡ </tspan><tspan x="833.90999967" style="fill: #6c6c6c">main</tspan><tspan x="867.60333299"> </tspan><tspan x="876.02666632" style="fill: #50fa7b">15s</tspan><tspan x="901.29666631"> </tspan><tspan x="909.71999964" style="fill: #50fa7b">⬢</tspan><tspan x="918.1433329700001"> </tspan>
+      </tspan><tspan y="279.99993">
+        <tspan dy="1em" x="0.0" style="fill: #bd93f9">Personal/Example </tspan><tspan x="143.19666661" style="fill: #1e1f29"> </tspan><tspan x="151.61999994">                                                                               ⇡ </tspan><tspan x="833.90999967" style="fill: #6c6c6c">main</tspan><tspan x="867.60333299"> </tspan><tspan x="876.02666632" style="fill: #50fa7b">20s</tspan><tspan x="901.29666631"> </tspan><tspan x="909.71999964" style="fill: #50fa7b">⬢</tspan><tspan x="918.1433329700001"> </tspan>
+      </tspan><tspan y="298.66659200000004">
+        <tspan dy="1em" x="0.0">                                                                                                              </tspan>
+      </tspan><tspan y="317.333254">
+        <tspan dy="1em" x="0.0">                                                                                                              </tspan>
+      </tspan><tspan y="335.99991600000004">
+        <tspan dy="1em" x="0.0">                                                                                                              </tspan>
+      </tspan><tspan y="354.666578">
+        <tspan dy="1em" x="0.0">                                                                                                              </tspan>
+      </tspan><tspan y="373.33324000000005">
+        <tspan dy="1em" x="0.0">                                                                                                              </tspan>
+      </tspan><tspan y="391.999902">
+        <tspan dy="1em" x="0.0">                                                                                                              </tspan>
+      </tspan><tspan y="410.66656400000005">
+        <tspan dy="1em" x="0.0">                                                                                                              </tspan>
+      </tspan><tspan y="429.333226">
+        <tspan dy="1em" x="0.0">                                                                                                              </tspan>
+      </tspan><tspan y="447.99988800000006">
+        <tspan dy="1em" x="0.0">                                                                                                              </tspan>
+      </tspan>
+    </text>
+  </svg>
+
+  <svg x="423.173" y="194.133" width="97.067" height="97.067">
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000.0 1000.0" style="filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.4))">
+  <defs>
+    <mask id="small-triangle-mask">
+      <rect width="100%" height="100%" fill="white"></rect>
+      <polygon points="700.0 500.0, 400.00000000000006 326.7949192431122, 399.9999999999999 673.2050807568877" fill="black">
+      </polygon>
+    </mask>
+  </defs>
+  <polygon points="1000.0 500.0, 250.0000000000001 66.98729810778059, 249.99999999999977 933.0127018922192" mask="url(#small-triangle-mask)" fill="white">
+  </polygon>
+  <polyline points="673.2050807568878 400.0, 326.7949192431123 600.0" stroke="white" stroke-width="90">
+  </polyline>
+</svg>
+  </svg>
+</svg>
