@@ -184,18 +184,82 @@ hexagon_exit() {
 	hexagon::color $color $symbol$exit_code
 }
 
+typeset -gA hexagon_parts
+
+hexagon::run() {
+	for component; do
+		print -rn -- $component$'\0'
+		hexagon_$component
+		print -n '\0'
+	done
+}
+
+hexagon::store() {
+	# Drop the empty field after the trailing NUL.
+	local -a pairs=("${(@0)1}")
+	hexagon_parts+=("${(@)pairs[1,-2]}")
+}
+
+hexagon::draw() {
+	local -a parts
+	local component
+	for component in $hexagon_components; do
+		parts+=(${hexagon_parts[$component]})
+	done
+
+	RPROMPT=${(j: :)parts}
+}
+
+# A job can't be cancelled, so prompts that arrive during one queue a single rerun.
+hexagon::async() {
+	# The callback only fires under ZLE.
+	[[ -o zle ]] && (( $#hexagon_async )) || return
+
+	if (( hexagon_async_fd )); then
+		hexagon_async_rerun=1
+		return
+	fi
+
+	unset hexagon_async_rerun
+
+	# Write the output at once, so the callback can't freeze typing.
+	exec {hexagon_async_fd}< <(print -rn -- "$(hexagon::run $hexagon_async)")
+	zle -F $hexagon_async_fd hexagon::async_done
+}
+
+hexagon::async_stop() {
+	(( hexagon_async_fd )) || return
+	zle -F $hexagon_async_fd
+	exec {hexagon_async_fd}<&-
+	unset hexagon_async_fd
+}
+
+hexagon::async_done() {
+	hexagon::store "$(<&$1)"
+	hexagon::async_stop
+	hexagon::draw
+	zle reset-prompt
+
+	[[ -n $hexagon_async_rerun ]] && hexagon::async
+}
+
 hexagon::render() {
 	local exit_code=$?
 
-	local -a components
+	local -a components async
 	hexagon::style -a ':hexagon' components timer jobs git
+	hexagon::style -a ':hexagon' async git
+	hexagon_components=($components)
+	hexagon_async=(${components:*async})
 
-	local output=$(
-		for component in $components; do
-			hexagon_$component
-			print -n '\0'
-		done
-	)
+	# Drop cached and pending async results from another directory.
+	if [[ $PWD != $hexagon_pwd ]]; then
+		hexagon_parts=()
+		hexagon::async_stop
+		hexagon_pwd=$PWD
+	fi
+
+	hexagon::store "$(hexagon::run ${components:|async})"
 
 	unset hexagon_command_start
 
@@ -204,7 +268,8 @@ hexagon::render() {
 	hexagon::style -s ':hexagon:path' format %2~
 
 	PROMPT="$(hexagon::color $color $format) "
-	RPROMPT=${(j: :)${(0)output}}
+	hexagon::draw
+	hexagon::async
 }
 
 add-zsh-hook precmd hexagon::render
